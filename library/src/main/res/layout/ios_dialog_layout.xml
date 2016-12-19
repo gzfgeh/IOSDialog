@@ -36,6 +36,13 @@
         android:textSize="18sp"
         android:textStyle="bold" />
 
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/content_view"
+        android:visibility="gone"/>
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="0.5dp"

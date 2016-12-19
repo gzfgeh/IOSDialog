@@ -2,9 +2,13 @@ package com.gzfgeh.iosdialog;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.support.annotation.IdRes;
+import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -23,6 +27,7 @@ public class IOSDialog {
     private LinearLayout lLayout_bg;
     private TextView txt_title;
     private TextView txt_msg;
+    private ViewGroup contentView;
     private Button btn_neg;
     private Button btn_pos;
     private ImageView img_line;
@@ -55,6 +60,7 @@ public class IOSDialog {
         btn_pos.setVisibility(View.GONE);
         img_line = (ImageView) view.findViewById(R.id.img_line);
         img_line.setVisibility(View.GONE);
+        contentView = (FrameLayout) view.findViewById(R.id.content_view);
 
         // Dialog
         dialog = new Dialog(context, R.style.AlertDialogStyle);
@@ -104,6 +110,40 @@ public class IOSDialog {
                 }
             }
         });
+        return this;
+    }
+
+    /**
+     * 添加自定义Msg布局
+     * @param view
+     * @param listener
+     * @return
+     */
+    public IOSDialog setContentView(@NonNull View view, final View.OnClickListener listener){
+        txt_msg.setVisibility(View.GONE);
+        contentView.setVisibility(View.VISIBLE);
+        contentView.removeAllViews();
+        contentView.addView(view);
+
+        contentView.setOnClickListener(listener);
+        return this;
+    }
+
+
+    /**
+     * 添加自定义Msg布局
+     * @param id
+     * @param listener
+     * @return
+     */
+    public IOSDialog setContentView(@LayoutRes int id, final View.OnClickListener listener){
+        txt_msg.setVisibility(View.GONE);
+        contentView.setVisibility(View.VISIBLE);
+        contentView.removeAllViews();
+        View view = View.inflate(context, id, null);
+        contentView.addView(view);
+
+        contentView.setOnClickListener(listener);
         return this;
     }
 
