@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         dialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                IOSDialog.getInstance(MainActivity.this).builder()
+                new IOSDialog(MainActivity.this).builder()
                         .setCancelable(true)
                         .setTitle("相册", new View.OnClickListener() {
                             @Override
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 Button button = new Button(view.getContext());
                 button.setText("ContentView");
 
-                IOSDialog.getInstance(MainActivity.this).builder()
+                new IOSDialog(MainActivity.this).builder()
                         .setCancelable(true)
                         .setTitle("相册", new View.OnClickListener() {
                             @Override

@@ -37,20 +37,7 @@ public class IOSDialog {
     private boolean showPosBtn = false;
     private boolean showNegBtn = false;
 
-    private volatile static IOSDialog iosDialog;
-
-    public static IOSDialog getInstance(Context context){
-       if (iosDialog == null){
-           synchronized (IOSDialog.class){
-               if (iosDialog == null){
-                   iosDialog = new IOSDialog(context);
-               }
-           }
-       }
-        return iosDialog;
-    }
-
-    private IOSDialog(Context context) {
+    public IOSDialog(Context context) {
         this.context = context;
         WindowManager windowManager = (WindowManager) context
                 .getSystemService(Context.WINDOW_SERVICE);
@@ -249,6 +236,7 @@ public class IOSDialog {
 
     public void show() {
         setLayout();
-        dialog.show();
+        if(!dialog.isShowing())
+            dialog.show();
     }
 }
