@@ -73,6 +73,16 @@ public class IOSDialog {
         return this;
     }
 
+    public IOSDialog setTitle(String title) {
+        showTitle = true;
+        if ("".equals(title)) {
+            txt_title.setText("");
+        } else {
+            txt_title.setText(title);
+        }
+        return this;
+    }
+
     public IOSDialog setTitle(String title, final View.OnClickListener listener) {
         showTitle = true;
         if ("".equals(title)) {
@@ -90,6 +100,16 @@ public class IOSDialog {
                 }
             }
         });
+        return this;
+    }
+
+    public IOSDialog setMsg(String msg) {
+        showMsg = true;
+        if ("".equals(msg)) {
+            txt_msg.setText("");
+        } else {
+            txt_msg.setText(msg);
+        }
         return this;
     }
 
@@ -129,6 +149,19 @@ public class IOSDialog {
         return this;
     }
 
+    /**
+     * 添加自定义Msg布局
+     * @param id
+     * @return
+     */
+    public IOSDialog setContentView(@LayoutRes int id){
+        txt_msg.setVisibility(View.GONE);
+        contentView.setVisibility(View.VISIBLE);
+        contentView.removeAllViews();
+        View view = View.inflate(context, id, null);
+        contentView.addView(view);
+        return this;
+    }
 
     /**
      * 添加自定义Msg布局
@@ -143,12 +176,29 @@ public class IOSDialog {
         View view = View.inflate(context, id, null);
         contentView.addView(view);
 
-        contentView.setOnClickListener(listener);
+        contentView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null)
+                    listener.onClick(v);
+                dialog.dismiss();
+            }
+        });
         return this;
     }
 
     public IOSDialog setCancelable(boolean cancel) {
         dialog.setCancelable(cancel);
+        return this;
+    }
+
+    public IOSDialog setPositiveButton(String text) {
+        showPosBtn = true;
+        if ("".equals(text)) {
+            btn_pos.setText("");
+        } else {
+            btn_pos.setText(text);
+        }
         return this;
     }
 
@@ -163,7 +213,8 @@ public class IOSDialog {
         btn_pos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onClick(v);
+                if(listener != null)
+                    listener.onClick(v);
                 dialog.dismiss();
             }
         });
