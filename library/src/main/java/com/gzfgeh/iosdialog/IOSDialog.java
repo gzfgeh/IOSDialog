@@ -36,6 +36,7 @@ public class IOSDialog {
     private boolean showMsg = false;
     private boolean showPosBtn = false;
     private boolean showNegBtn = false;
+    private boolean outSideEnable = true;
 
     public IOSDialog(Context context) {
         this.context = context;
@@ -240,6 +241,12 @@ public class IOSDialog {
         return this;
     }
 
+    public IOSDialog setCanceledOnTouchOutside(boolean enable){
+        outSideEnable = enable;
+        dialog.setCanceledOnTouchOutside(enable);
+        return this;
+    }
+
     private void setLayout() {
         if (!showTitle && !showMsg) {
             txt_title.setText("");
@@ -283,6 +290,7 @@ public class IOSDialog {
             btn_neg.setVisibility(View.VISIBLE);
             btn_neg.setBackgroundResource(R.drawable.alertdialog_single_selector);
         }
+        dialog.setCanceledOnTouchOutside(outSideEnable);
     }
 
     public void show() {
