@@ -304,4 +304,10 @@ public class IOSDialog {
         if(!dialog.isShowing())
             dialog.show();
     }
+
+    public void dismiss(){
+        if (dialog.isShowing()){
+            dialog.dismiss();
+        }
+    }
 }
