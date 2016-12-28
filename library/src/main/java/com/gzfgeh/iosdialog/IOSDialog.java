@@ -32,6 +32,7 @@ public class IOSDialog {
     private Button btn_pos;
     private ImageView img_line;
     private Display display;
+    private LinearLayout btn_layout;
     private boolean showTitle = false;
     private boolean showMsg = false;
     private boolean showPosBtn = false;
@@ -62,7 +63,7 @@ public class IOSDialog {
         img_line = (ImageView) view.findViewById(R.id.img_line);
         img_line.setVisibility(View.GONE);
         contentView = (FrameLayout) view.findViewById(R.id.content_view);
-
+        btn_layout = (LinearLayout) view.findViewById(R.id.btn_layout);
         // Dialog
         dialog = new Dialog(context, R.style.AlertDialogStyle);
         dialog.setContentView(view);
@@ -131,6 +132,19 @@ public class IOSDialog {
                 }
             }
         });
+        return this;
+    }
+
+    /**
+     * 添加自定义Msg布局
+     * @param view
+     * @return
+     */
+    public IOSDialog setContentView(@NonNull View view){
+        txt_msg.setVisibility(View.GONE);
+        contentView.setVisibility(View.VISIBLE);
+        contentView.removeAllViews();
+        contentView.addView(view);
         return this;
     }
 
@@ -262,15 +276,7 @@ public class IOSDialog {
         }
 
         if (!showPosBtn && !showNegBtn) {
-            btn_pos.setText("");
-            btn_pos.setVisibility(View.VISIBLE);
-            btn_pos.setBackgroundResource(R.drawable.alertdialog_single_selector);
-            btn_pos.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialog.dismiss();
-                }
-            });
+            btn_layout.setVisibility(View.GONE);
         }
 
         if (showPosBtn && showNegBtn) {
