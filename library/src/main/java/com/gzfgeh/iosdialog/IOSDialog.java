@@ -71,7 +71,6 @@ public class IOSDialog {
         // dialog
         lLayout_bg.setLayoutParams(new FrameLayout.LayoutParams((int) (display
                 .getWidth() * 0.7), LinearLayout.LayoutParams.WRAP_CONTENT));
-
         return this;
     }
 
