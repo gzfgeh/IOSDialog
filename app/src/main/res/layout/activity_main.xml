@@ -7,16 +7,24 @@
     android:orientation="vertical"
     tools:context="com.gzfgeh.dialogdemo.MainActivity">
 
-    <TextView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dialog"
-        android:id="@+id/dialog"/>
+        android:text="照片"
+        android:id="@+id/dialog"
+        android:layout_gravity="center"/>
 
-    <TextView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Content"
+        android:text="自定义Content"
         android:id="@+id/content"
-        android:layout_margin="50dp"/>
+        android:layout_gravity="center"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="设置标题颜色"
+        android:id="@+id/title"
+        android:layout_gravity="center"/>
 </LinearLayout>

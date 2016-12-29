@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView dialog = (TextView) findViewById(R.id.dialog);
+        Button dialog = (Button) findViewById(R.id.dialog);
         dialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        TextView content = (TextView) findViewById(R.id.content);
+        Button content = (Button) findViewById(R.id.content);
         content.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,6 +56,28 @@ public class MainActivity extends AppCompatActivity {
                         })
                         .setContentView(button, null)
                         .setNegativeButton("取消", null)
+                        .show();
+            }
+        });
+
+        Button title = (Button) findViewById(R.id.title);
+        title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new IOSDialog(MainActivity.this).builder()
+                        .setTitle("选择", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Toast.makeText(MainActivity.this, "相册", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .setMsg("消息")
+                        .setMsgColor(R.color.colorPrimary)
+                        .setMsgBackground(R.color.colorAccent)
+                        .setTitleColor(R.color.colorAccent)
+                        .setTitleBackground(R.color.colorPrimary)
+                        .setNegativeButton("取消", null)
+                        .setPositiveButton("确定", null)
                         .show();
             }
         });

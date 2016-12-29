@@ -2,6 +2,10 @@ package com.gzfgeh.iosdialog;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.support.annotation.ColorInt;
+import android.support.annotation.ColorRes;
+import android.support.annotation.DimenRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -31,6 +35,8 @@ public class IOSDialog {
     private Button btn_neg;
     private Button btn_pos;
     private ImageView img_line;
+    private ImageView content_line;
+    private ImageView title_line;
     private Display display;
     private LinearLayout btn_layout;
     private boolean showTitle = false;
@@ -38,6 +44,8 @@ public class IOSDialog {
     private boolean showPosBtn = false;
     private boolean showNegBtn = false;
     private boolean outSideEnable = true;
+    private boolean netBtnBgr = false;
+    private boolean posBtnBgr = false;
 
     public IOSDialog(Context context) {
         this.context = context;
@@ -64,6 +72,8 @@ public class IOSDialog {
         img_line.setVisibility(View.GONE);
         contentView = (FrameLayout) view.findViewById(R.id.content_view);
         btn_layout = (LinearLayout) view.findViewById(R.id.btn_layout);
+        content_line = (ImageView) view.findViewById(R.id.content_line);
+        title_line = (ImageView) view.findViewById(R.id.title_line);
         // Dialog
         dialog = new Dialog(context, R.style.AlertDialogStyle);
         dialog.setContentView(view);
@@ -74,6 +84,11 @@ public class IOSDialog {
         return this;
     }
 
+    /**
+     * 设置标题
+     * @param title
+     * @return
+     */
     public IOSDialog setTitle(String title) {
         showTitle = true;
         if ("".equals(title)) {
@@ -84,6 +99,12 @@ public class IOSDialog {
         return this;
     }
 
+    /**
+     * 设置标题和标题的点击事件
+     * @param title
+     * @param listener
+     * @return
+     */
     public IOSDialog setTitle(String title, final View.OnClickListener listener) {
         showTitle = true;
         if ("".equals(title)) {
@@ -104,6 +125,72 @@ public class IOSDialog {
         return this;
     }
 
+    /**
+     * 设置标题大小
+     * @param size
+     * @return
+     */
+    public IOSDialog setTitleSize(@DimenRes int size) {
+        txt_title.setTextSize(context.getResources().getDimension(size));
+        return this;
+    }
+
+    /**
+     * 设置标题颜色
+     * @param color
+     * @return
+     */
+    public IOSDialog setTitleColor(@ColorRes int color) {
+        txt_title.setTextColor(context.getResources().getColor(color));
+        return this;
+    }
+
+    /**
+     * 设置标题颜色
+     * @param color
+     * @return
+     */
+    public IOSDialog setTitleColor(String color) {
+        txt_title.setTextColor(Color.parseColor(color));
+        return this;
+    }
+
+    /**
+     * 设置标题背景颜色
+     * @param color
+     * @return
+     */
+    public IOSDialog setTitleBackground(@ColorRes int color) {
+        txt_title.setBackgroundResource(color);
+        return this;
+    }
+
+    /**
+     * 设置标题背景颜色
+     * @param color
+     * @return
+     */
+    public IOSDialog setTitleBackground(String color) {
+        txt_title.setBackgroundColor(Color.parseColor(color));
+        return this;
+    }
+
+
+    /**
+     * 设置内容大小
+     * @param size
+     * @return
+     */
+    public IOSDialog setMsgSize(@DimenRes int size) {
+        txt_msg.setTextSize(context.getResources().getDimension(size));
+        return this;
+    }
+
+    /**
+     * 设置Msg
+     * @param msg
+     * @return
+     */
     public IOSDialog setMsg(String msg) {
         showMsg = true;
         if ("".equals(msg)) {
@@ -114,6 +201,12 @@ public class IOSDialog {
         return this;
     }
 
+    /**
+     * 设置msg和msg点击事件
+     * @param msg
+     * @param listener
+     * @return
+     */
     public IOSDialog setMsg(String msg, final View.OnClickListener listener) {
         showMsg = true;
         if ("".equals(msg)) {
@@ -133,6 +226,51 @@ public class IOSDialog {
         });
         return this;
     }
+
+    /**
+     * 设置标题颜色
+     * @param color
+     * @return
+     */
+    public IOSDialog setMsgColor(@ColorRes int color) {
+        txt_msg.setTextColor(context.getResources().getColor(color));
+        return this;
+    }
+
+    /**
+     * 设置标题颜色
+     * @param color
+     * @return
+     */
+    public IOSDialog setMsgColor(String color) {
+        txt_msg.setTextColor(Color.parseColor(color));
+        return this;
+    }
+
+    /**
+     * 设置标题背景颜色
+     * @param color
+     * @return
+     */
+    public IOSDialog setMsgBackground(@ColorRes int color) {
+        txt_msg.setBackgroundResource(color);
+        title_line.setVisibility(View.GONE);
+        content_line.setVisibility(View.GONE);
+        return this;
+    }
+
+    /**
+     * 设置标题背景颜色
+     * @param color
+     * @return
+     */
+    public IOSDialog setMsgBackground(String color) {
+        txt_msg.setBackgroundColor(Color.parseColor(color));
+        title_line.setVisibility(View.GONE);
+        content_line.setVisibility(View.GONE);
+        return this;
+    }
+
 
     /**
      * 添加自定义Msg布局
@@ -159,7 +297,14 @@ public class IOSDialog {
         contentView.removeAllViews();
         contentView.addView(view);
 
-        contentView.setOnClickListener(listener);
+        contentView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null)
+                    listener.onClick(v);
+                dialog.dismiss();
+            }
+        });
         return this;
     }
 
@@ -216,6 +361,12 @@ public class IOSDialog {
         return this;
     }
 
+    /**
+     * 设置确定按钮和点击事件
+     * @param text
+     * @param listener
+     * @return
+     */
     public IOSDialog setPositiveButton(String text,
                                        final View.OnClickListener listener) {
         showPosBtn = true;
@@ -235,6 +386,74 @@ public class IOSDialog {
         return this;
     }
 
+    /**
+     * 设置确定按钮大小
+     * @param size
+     * @return
+     */
+    public IOSDialog setPositiveBtnSize(@DimenRes int size) {
+        btn_pos.setTextSize(context.getResources().getDimension(size));
+        return this;
+    }
+
+    /**
+     * 设置确定按钮颜色
+     * @param color
+     * @return
+     */
+    public IOSDialog setPositiveBtnColor(@ColorRes int color) {
+        btn_pos.setTextColor(context.getResources().getColor(color));
+        return this;
+    }
+
+    /**
+     * 设置确定按钮颜色
+     * @param color
+     * @return
+     */
+    public IOSDialog setPositiveBtnColor(String color) {
+        btn_pos.setTextColor(Color.parseColor(color));
+        return this;
+    }
+
+    /**
+     * 设置确定按钮背景颜色
+     * @param color
+     * @return
+     */
+    public IOSDialog setPositiveBtnBackground(@ColorRes int color) {
+        btn_pos.setBackgroundResource(color);
+        posBtnBgr = true;
+        return this;
+    }
+
+    /**
+     * 设置确定按钮背景颜色
+     * @param color
+     * @return
+     */
+    public IOSDialog setPositiveBtnBackground(String color) {
+        btn_pos.setBackgroundColor(Color.parseColor(color));
+        posBtnBgr = true;
+        return this;
+    }
+
+    /**
+     * 设置确定按钮大小
+     * @param size
+     * @return
+     */
+    public IOSDialog seNegativeBtnSize(@DimenRes int size) {
+        btn_neg.setTextSize(context.getResources().getDimension(size));
+        return this;
+    }
+
+    /**
+     * 设置取消按钮和点击事件
+     * @param text
+     * @param listener
+     * @return
+     */
     public IOSDialog setNegativeButton(String text,
                                        final View.OnClickListener listener) {
         showNegBtn = true;
@@ -254,6 +473,53 @@ public class IOSDialog {
         return this;
     }
 
+    /**
+     * 设置确定按钮颜色
+     * @param color
+     * @return
+     */
+    public IOSDialog setNegativeBtnColor(@ColorRes int color) {
+        btn_neg.setTextColor(context.getResources().getColor(color));
+        return this;
+    }
+
+    /**
+     * 设置确定按钮颜色
+     * @param color
+     * @return
+     */
+    public IOSDialog setNegativeBtnColor(String color) {
+        btn_neg.setTextColor(Color.parseColor(color));
+        return this;
+    }
+
+    /**
+     * 设置确定按钮背景颜色
+     * @param color
+     * @return
+     */
+    public IOSDialog setNegativeBtnBackground(@ColorRes int color) {
+        btn_neg.setBackgroundResource(color);
+        netBtnBgr = true;
+        return this;
+    }
+
+    /**
+     * 设置确定按钮背景颜色
+     * @param color
+     * @return
+     */
+    public IOSDialog setNegativeBtnBackground(String color) {
+        btn_neg.setBackgroundColor(Color.parseColor(color));
+        netBtnBgr = true;
+        return this;
+    }
+
+    /**
+     * 点击外部是否消失
+     * @param enable
+     * @return
+     */
     public IOSDialog setCanceledOnTouchOutside(boolean enable){
         outSideEnable = enable;
         dialog.setCanceledOnTouchOutside(enable);
@@ -261,17 +527,16 @@ public class IOSDialog {
     }
 
     private void setLayout() {
-        if (!showTitle && !showMsg) {
-            txt_title.setText("");
-            txt_title.setVisibility(View.VISIBLE);
-        }
-
         if (showTitle) {
             txt_title.setVisibility(View.VISIBLE);
+        }else{
+            txt_title.setVisibility(View.GONE);
         }
 
         if (showMsg) {
             txt_msg.setVisibility(View.VISIBLE);
+        }else{
+            txt_msg.setVisibility(View.GONE);
         }
 
         if (!showPosBtn && !showNegBtn) {
@@ -280,20 +545,24 @@ public class IOSDialog {
 
         if (showPosBtn && showNegBtn) {
             btn_pos.setVisibility(View.VISIBLE);
-            btn_pos.setBackgroundResource(R.drawable.alertdialog_right_selector);
+            if (!posBtnBgr)
+                btn_pos.setBackgroundResource(R.drawable.alertdialog_right_selector);
             btn_neg.setVisibility(View.VISIBLE);
-            btn_neg.setBackgroundResource(R.drawable.alertdialog_left_selector);
+            if (!netBtnBgr)
+                btn_neg.setBackgroundResource(R.drawable.alertdialog_left_selector);
             img_line.setVisibility(View.VISIBLE);
         }
 
         if (showPosBtn && !showNegBtn) {
             btn_pos.setVisibility(View.VISIBLE);
-            btn_pos.setBackgroundResource(R.drawable.alertdialog_single_selector);
+            if (!posBtnBgr)
+                btn_pos.setBackgroundResource(R.drawable.alertdialog_single_selector);
         }
 
         if (!showPosBtn && showNegBtn) {
             btn_neg.setVisibility(View.VISIBLE);
-            btn_neg.setBackgroundResource(R.drawable.alertdialog_single_selector);
+            if (!netBtnBgr)
+                btn_neg.setBackgroundResource(R.drawable.alertdialog_single_selector);
         }
         dialog.setCanceledOnTouchOutside(outSideEnable);
     }
