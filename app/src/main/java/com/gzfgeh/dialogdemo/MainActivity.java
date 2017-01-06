@@ -86,7 +86,9 @@ public class MainActivity extends AppCompatActivity {
         loading.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IOSDialog.showLoading(MainActivity.this);
+                new IOSDialog(MainActivity.this).builder()
+                        .setLoadingView()
+                .show();
             }
         });
 
@@ -94,7 +96,9 @@ public class MainActivity extends AppCompatActivity {
         loadingColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IOSDialog.showLoading(MainActivity.this, R.color.colorAccent);
+                new IOSDialog(MainActivity.this).builder()
+                        .setLoadingView(R.color.colorAccent)
+                .show();
             }
         });
     }

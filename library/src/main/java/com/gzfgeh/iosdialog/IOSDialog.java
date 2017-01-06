@@ -587,24 +587,20 @@ public class IOSDialog {
 
     /**
      * loading dialog
-     * @param context
      */
-    public static void showLoading(Context context){
-        new IOSDialog(context).builder()
-                .setContentView(R.layout.loading_layout)
-                .show();
+    public IOSDialog setLoadingView(){
+        setContentView(R.layout.loading_layout);
+        return this;
     }
 
     /**
      * loading dialog
-     * @param context
      */
-    public static void showLoading(Context context, @ColorRes int color){
+    public IOSDialog setLoadingView(@ColorRes int color){
         View view = LayoutInflater.from(context).inflate(R.layout.loading_layout, null);
         ProgressWheel progressWheel = (ProgressWheel) view.findViewById(R.id.progress_wheel);
         progressWheel.setBarColor(color);
-        new IOSDialog(context).builder()
-                .setContentView(view)
-                .show();
+        setContentView(view);
+        return this;
     }
 }
