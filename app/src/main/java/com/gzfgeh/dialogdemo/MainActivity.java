@@ -81,5 +81,21 @@ public class MainActivity extends AppCompatActivity {
                         .show();
             }
         });
+
+        Button loading = (Button) findViewById(R.id.loading);
+        loading.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IOSDialog.showLoading(MainActivity.this);
+            }
+        });
+
+        Button loadingColor = (Button) findViewById(R.id.loading_color);
+        loadingColor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IOSDialog.showLoading(MainActivity.this, R.color.colorAccent);
+            }
+        });
     }
 }

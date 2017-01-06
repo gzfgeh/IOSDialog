@@ -531,12 +531,18 @@ public class IOSDialog {
             txt_title.setVisibility(View.VISIBLE);
         }else{
             txt_title.setVisibility(View.GONE);
+            title_line.setVisibility(View.GONE);
         }
 
         if (showMsg) {
             txt_msg.setVisibility(View.VISIBLE);
         }else{
             txt_msg.setVisibility(View.GONE);
+            content_line.setVisibility(View.GONE);
+        }
+
+        if (!showTitle && !showMsg){
+            lLayout_bg.setBackgroundColor(context.getResources().getColor(android.R.color.transparent));
         }
 
         if (!showPosBtn && !showNegBtn) {
@@ -577,5 +583,28 @@ public class IOSDialog {
         if (dialog.isShowing()){
             dialog.dismiss();
         }
+    }
+
+    /**
+     * loading dialog
+     * @param context
+     */
+    public static void showLoading(Context context){
+        new IOSDialog(context).builder()
+                .setContentView(R.layout.loading_layout)
+                .show();
+    }
+
+    /**
+     * loading dialog
+     * @param context
+     */
+    public static void showLoading(Context context, @ColorRes int color){
+        View view = LayoutInflater.from(context).inflate(R.layout.loading_layout, null);
+        ProgressWheel progressWheel = (ProgressWheel) view.findViewById(R.id.progress_wheel);
+        progressWheel.setBarColor(color);
+        new IOSDialog(context).builder()
+                .setContentView(view)
+                .show();
     }
 }
