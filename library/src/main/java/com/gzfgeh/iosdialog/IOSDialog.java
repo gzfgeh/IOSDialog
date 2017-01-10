@@ -599,7 +599,7 @@ public class IOSDialog {
     public IOSDialog setLoadingView(@ColorRes int color){
         View view = LayoutInflater.from(context).inflate(R.layout.loading_layout, null);
         ProgressWheel progressWheel = (ProgressWheel) view.findViewById(R.id.progress_wheel);
-        progressWheel.setBarColor(color);
+        progressWheel.setBarColor(context.getResources().getColor(color));
         setContentView(view);
         return this;
     }
