@@ -101,5 +101,17 @@ public class MainActivity extends AppCompatActivity {
                 .show();
             }
         });
+
+        Button btn = (Button) findViewById(R.id.no_title);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new IOSDialog(MainActivity.this).builder()
+                        .setMsg("测试")
+                        .setNegativeButton("取消", null)
+                        .setPositiveButton("确定", null)
+                        .show();
+            }
+        });
     }
 }

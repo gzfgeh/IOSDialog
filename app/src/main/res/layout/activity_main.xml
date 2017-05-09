@@ -41,4 +41,11 @@
         android:text="Loading Color"
         android:id="@+id/loading_color"
         android:layout_gravity="center"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No Title"
+        android:id="@+id/no_title"
+        android:layout_gravity="center"/>
 </LinearLayout>

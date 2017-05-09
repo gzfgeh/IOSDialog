@@ -255,7 +255,6 @@ public class IOSDialog {
     public IOSDialog setMsgBackground(@ColorRes int color) {
         txt_msg.setBackgroundResource(color);
         title_line.setVisibility(View.GONE);
-        content_line.setVisibility(View.GONE);
         return this;
     }
 
@@ -267,7 +266,6 @@ public class IOSDialog {
     public IOSDialog setMsgBackground(String color) {
         txt_msg.setBackgroundColor(Color.parseColor(color));
         title_line.setVisibility(View.GONE);
-        content_line.setVisibility(View.GONE);
         return this;
     }
 
@@ -282,6 +280,7 @@ public class IOSDialog {
         contentView.setVisibility(View.VISIBLE);
         contentView.removeAllViews();
         contentView.addView(view);
+        content_line.setVisibility(View.VISIBLE);
         return this;
     }
 
@@ -296,6 +295,7 @@ public class IOSDialog {
         contentView.setVisibility(View.VISIBLE);
         contentView.removeAllViews();
         contentView.addView(view);
+        content_line.setVisibility(View.VISIBLE);
 
         contentView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -319,6 +319,7 @@ public class IOSDialog {
         contentView.removeAllViews();
         View view = View.inflate(context, id, null);
         contentView.addView(view);
+        content_line.setVisibility(View.VISIBLE);
         return this;
     }
 
@@ -334,6 +335,7 @@ public class IOSDialog {
         contentView.removeAllViews();
         View view = View.inflate(context, id, null);
         contentView.addView(view);
+        content_line.setVisibility(View.VISIBLE);
 
         contentView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -538,11 +540,18 @@ public class IOSDialog {
             txt_msg.setVisibility(View.VISIBLE);
         }else{
             txt_msg.setVisibility(View.GONE);
-            content_line.setVisibility(View.GONE);
         }
 
         if (!showTitle && !showMsg){
             lLayout_bg.setBackgroundColor(context.getResources().getColor(android.R.color.transparent));
+            content_line.setVisibility(View.GONE);
+        }
+
+        if (!showTitle && showMsg){
+            LinearLayout.LayoutParams params = ((LinearLayout.LayoutParams)txt_msg.getLayoutParams());
+            params.setMargins(40, 40, 40, 40);
+            txt_msg.setLayoutParams(params);
+            txt_msg.setTextColor(Color.parseColor("#333333"));
         }
 
         if (!showPosBtn && !showNegBtn) {
