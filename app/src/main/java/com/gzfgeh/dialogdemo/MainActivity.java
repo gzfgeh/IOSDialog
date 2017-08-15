@@ -1,7 +1,11 @@
 package com.gzfgeh.dialogdemo;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -102,12 +106,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        final SpannableStringBuilder builder = new SpannableStringBuilder("选择角色后不可跟换，确定选择 暖通公司 吗？");
+        ForegroundColorSpan span = new ForegroundColorSpan(Color.RED);
+        builder.setSpan(span, 15, 19, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
         Button btn = (Button) findViewById(R.id.no_title);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new IOSDialog(MainActivity.this).builder()
-                        .setMsg("测试")
+                new IOSDialog(MainActivity.this, 0.9f).builder()
+                        .setMsg(builder)
                         .setNegativeButton("取消", null)
                         .setPositiveButton("确定", null)
                         .show();

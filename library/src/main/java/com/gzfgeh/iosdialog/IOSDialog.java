@@ -9,6 +9,7 @@ import android.support.annotation.DimenRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
+import android.text.SpannableStringBuilder;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,12 +47,21 @@ public class IOSDialog {
     private boolean outSideEnable = true;
     private boolean netBtnBgr = false;
     private boolean posBtnBgr = false;
+    private float percentWidth = 0f;
 
     public IOSDialog(Context context) {
         this.context = context;
         WindowManager windowManager = (WindowManager) context
                 .getSystemService(Context.WINDOW_SERVICE);
         display = windowManager.getDefaultDisplay();
+    }
+
+    public IOSDialog(Context context, float percentWidth) {
+        this.context = context;
+        WindowManager windowManager = (WindowManager) context
+                .getSystemService(Context.WINDOW_SERVICE);
+        display = windowManager.getDefaultDisplay();
+        this.percentWidth = percentWidth;
     }
 
     public IOSDialog builder() {
@@ -79,8 +89,14 @@ public class IOSDialog {
         dialog.setContentView(view);
         dialog.setCancelable(false);
         // dialog
+        if (percentWidth == 0f){
+            percentWidth = 0.7f;
+        }else{
+            percentWidth = 0.9f;
+        }
+
         lLayout_bg.setLayoutParams(new FrameLayout.LayoutParams((int) (display
-                .getWidth() * 0.7), LinearLayout.LayoutParams.WRAP_CONTENT));
+                .getWidth() * percentWidth), LinearLayout.LayoutParams.WRAP_CONTENT));
         return this;
     }
 
@@ -192,6 +208,21 @@ public class IOSDialog {
      * @return
      */
     public IOSDialog setMsg(String msg) {
+        showMsg = true;
+        if ("".equals(msg)) {
+            txt_msg.setText("");
+        } else {
+            txt_msg.setText(msg);
+        }
+        return this;
+    }
+
+    /**
+     * 设置Msg
+     * @param msg
+     * @return
+     */
+    public IOSDialog setMsg(SpannableStringBuilder msg) {
         showMsg = true;
         if ("".equals(msg)) {
             txt_msg.setText("");
