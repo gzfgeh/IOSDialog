@@ -573,11 +573,6 @@ public class IOSDialog {
             txt_msg.setVisibility(View.GONE);
         }
 
-        if (!showTitle && !showMsg){
-            //lLayout_bg.setBackgroundColor(context.getResources().getColor(android.R.color.transparent));
-            //content_line.setVisibility(View.GONE);
-        }
-
         if (!showTitle && showMsg){
             LinearLayout.LayoutParams params = ((LinearLayout.LayoutParams)txt_msg.getLayoutParams());
             params.setMargins(40, 40, 40, 40);
@@ -610,6 +605,12 @@ public class IOSDialog {
             if (!netBtnBgr)
                 btn_neg.setBackgroundResource(R.drawable.alertdialog_single_selector);
         }
+
+        if (!showTitle && !showMsg && !showPosBtn && !showNegBtn){
+            //lLayout_bg.setBackgroundColor(context.getResources().getColor(android.R.color.transparent));
+            content_line.setVisibility(View.GONE);
+        }
+
         dialog.setCanceledOnTouchOutside(outSideEnable);
     }
 

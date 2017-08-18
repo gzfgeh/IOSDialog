@@ -48,4 +48,11 @@
         android:text="No Title"
         android:id="@+id/no_title"
         android:layout_gravity="center"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nothing"
+        android:id="@+id/nothing"
+        android:layout_gravity="center"/>
 </LinearLayout>

@@ -114,5 +114,15 @@ public class MainActivity extends AppCompatActivity {
                         .show();
             }
         });
+
+        Button nothingBtn = (Button) findViewById(R.id.nothing);
+        nothingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new IOSDialog(MainActivity.this).builder()
+                        .setContentView(R.layout.pay_dialog, null)
+                        .show();
+            }
+        });
     }
 }
