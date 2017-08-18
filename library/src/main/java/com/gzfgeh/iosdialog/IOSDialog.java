@@ -574,8 +574,8 @@ public class IOSDialog {
         }
 
         if (!showTitle && !showMsg){
-            lLayout_bg.setBackgroundColor(context.getResources().getColor(android.R.color.transparent));
-            content_line.setVisibility(View.GONE);
+            //lLayout_bg.setBackgroundColor(context.getResources().getColor(android.R.color.transparent));
+            //content_line.setVisibility(View.GONE);
         }
 
         if (!showTitle && showMsg){

@@ -47,19 +47,11 @@ public class MainActivity extends AppCompatActivity {
         content.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Button button = new Button(view.getContext());
-                button.setText("ContentView");
 
                 new IOSDialog(MainActivity.this).builder()
-                        .setCancelable(true)
-                        .setTitle("相册", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Toast.makeText(MainActivity.this, "相册", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .setContentView(button, null)
+                        .setContentView(R.layout.pay_dialog, null)
                         .setNegativeButton("取消", null)
+                        .setPositiveButton("确定", null)
                         .show();
             }
         });
