@@ -2,6 +2,7 @@ package com.gzfgeh.iosdialog;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
@@ -11,6 +12,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.text.SpannableStringBuilder;
 import android.view.Display;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -558,6 +560,13 @@ public class IOSDialog {
         dialog.setCanceledOnTouchOutside(enable);
         return this;
     }
+
+    public IOSDialog setOnDismissListener(DialogInterface.OnDismissListener listener){
+        dialog.setOnDismissListener(listener);
+        return this;
+    }
+
+
 
     private void setLayout() {
         if (showTitle) {
